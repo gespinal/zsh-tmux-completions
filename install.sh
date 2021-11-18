@@ -1,4 +1,4 @@
-sudo dnf -y install vim zsh util-linux-user rsync
+sudo dnf -y install vim zsh tmux util-linux-user rsync
 chsh -s $(which zsh)
 [ -d "${HOME}/.oh-my-zsh" ] && rm -rf ${HOME}/.oh-my-zsh 2> /dev/null
 sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
