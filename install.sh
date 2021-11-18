@@ -1,4 +1,9 @@
-sudo dnf -y install vim zsh tmux util-linux-user rsync
+#!/bin/bash
+if [ -f /etc/redhat-release ]; then
+	sudo dnf -y install vim zsh tmux util-linux-user rsync
+    elif [ -f "/etc/os-release" ] && grep -q "Arch" "/etc/os-release"; then
+	sudo pacman -S vim zsh tmux rsync
+fi
 chsh -s $(which zsh)
 [ -d "${HOME}/.oh-my-zsh" ] && rm -rf ${HOME}/.oh-my-zsh 2> /dev/null
 sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
