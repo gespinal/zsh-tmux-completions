@@ -1612,3 +1612,7 @@ typeset -g POWERLEVEL9K_CONFIG_FILE=${${(%):-%x}:a}
 'builtin' 'unset' 'p10k_config_opts'
 
 typeset -g POWERLEVEL9K_CONTEXT_{REMOTE,REMOTE_SUDO}_FOREGROUND=blue
+typeset -g POWERLEVEL9K_CONTEXT_FOREGROUND=red
+typeset -g POWERLEVEL9K_CONTEXT_ROOT_FOREGROUND=green
+typeset -g POWERLEVEL9K_ALWAYS_SHOW_USER=true
+typeset -g DEFAULT_USER="$(whoami)"
