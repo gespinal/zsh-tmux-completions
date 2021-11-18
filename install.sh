@@ -1,7 +1,7 @@
 #!/bin/bash
 if [ -f /etc/redhat-release ]; then
 	sudo dnf -y install vim zsh tmux util-linux-user rsync
-elif [ -f "/etc/os-release" ] && grep -q "Arch" "/etc/os-release"; then
+elif [ -f /etc/os-release ] && grep -q "Arch" "/etc/os-release"; then
 	sudo pacman -S vim zsh tmux rsync
 elif [ -f /etc/debian_version ]; then
 	sudo apt install vim zsh tmux rsync
