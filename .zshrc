@@ -123,8 +123,6 @@ POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(context dir vcs)
 export VAGRANT_DEFAULT_PROVIDER=libvirt
 export LIBVIRT_DEFAULT_URI=qemu:///system
 
-export XDG_SEAT_PATH=/org/freedesktop/DisplayManager/Seat0
-
 . ~/.oc_completion
 . ~/.crc_completion
 . ~/.podman_completion
