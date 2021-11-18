@@ -89,8 +89,6 @@ ZSH_THEME="powerlevel10k/powerlevel10k"
 #plugins=(git zsh-syntax-highlighting zsh-completions zsh-history-substring-search zsh-autosuggestions)
 plugins=(git zsh-syntax-highlighting zsh-completions zsh-history-substring-search)
 
-autoload -U compinit && compinit
-
 source $ZSH/oh-my-zsh.sh
 
 # User configuration
@@ -133,3 +131,5 @@ alias podman="sudo podman"
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+
+autoload -U compinit; compinit
