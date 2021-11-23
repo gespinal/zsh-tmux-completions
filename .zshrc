@@ -133,4 +133,6 @@ alias podman="sudo podman"
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 [[ ! -f /usr/local/aws/bin/aws_zsh_completer.sh ]] || source /usr/local/aws/bin/aws_zsh_completer.sh
 
+#source ~/.oh-my-zsh/custom/zsh-autocomplete/zsh-autocomplete.plugin.zsh
+
 autoload -U compinit; compinit
