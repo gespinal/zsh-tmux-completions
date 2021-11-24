@@ -2,7 +2,7 @@
 # if attachment fails, start a new session
 #if [ -x "$(command -v tmux)" ] && [ -n "${DISPLAY}" ]; then
 if [ -x "$(command -v tmux)" ] ; then
-  [ -z "${TMUX}" ] && { tmux; } >/dev/null 2>&1
+  [ -z "${TMUX}" ] && { exec tmux; } >/dev/null 2>&1
 fi
 
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
