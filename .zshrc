@@ -122,7 +122,7 @@ POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(context dir vcs)
 export VAGRANT_DEFAULT_PROVIDER=libvirt
 export LIBVIRT_DEFAULT_URI=qemu:///system
 
-[[ ! -d "~./.local/bin" ]] || export PATH=./.local/bin:$PATH
+[[ ! -d "~/.local/bin" ]] || export PATH=./.local/bin:$PATH
 
 . ~/.oc_completion
 . ~/.crc_completion
