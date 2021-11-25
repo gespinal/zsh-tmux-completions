@@ -127,7 +127,9 @@ export LIBVIRT_DEFAULT_URI=qemu:///system
 . ~/.oc_completion
 . ~/.crc_completion
 . ~/.podman_completion
-complete -C `which aws_completer` aws
+
+[[ ! -f ${HOME}/.local/bin/aws_completer ]] || complete -C `which aws_completer` aws
+[[ ! -f /usr/local/aws/bin/aws_zsh_completer.sh ]] || source /usr/local/aws/bin/aws_zsh_completer.sh
 
 alias vi=vim
 alias podman="sudo podman"
@@ -135,7 +137,6 @@ alias podman="sudo podman"
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.fzf.zsh ]] || source ~/.fzf.zsh
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
-[[ ! -f /usr/local/aws/bin/aws_zsh_completer.sh ]] || source /usr/local/aws/bin/aws_zsh_completer.sh
 
 #source ~/.oh-my-zsh/custom/zsh-autocomplete/zsh-autocomplete.plugin.zsh
 
