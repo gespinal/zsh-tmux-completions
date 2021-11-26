@@ -1,10 +1,3 @@
-# if tmux is executable, X is running, and not inside a tmux session, then try to attach.
-# if attachment fails, start a new session
-#if [ -x "$(command -v tmux)" ] && [ -n "${DISPLAY}" ]; then
-if [ -x "$(command -v tmux)" ] ; then
-  [ -z "${TMUX}" ] && { exec tmux; } >/dev/null 2>&1
-fi
-
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
 # Initialization code that may require console input (password prompts, [y/n]
 # confirmations, etc.) must go above this block; everything else may go below.
@@ -17,6 +10,8 @@ fi
 
 # Path to your oh-my-zsh installation.
 export ZSH="${HOME}/.oh-my-zsh"
+
+ZSH_TMUX_AUTOSTART='true'
 
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,
