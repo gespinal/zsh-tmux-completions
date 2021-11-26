@@ -1,6 +1,6 @@
 # ZSH_TMUX_AUTOSTART='true'
-if [[ ! $(tmux list-sessions) ]]; then 
-  tmux
+if [[ ! $(tmux list-sessions) ]]; then
+  exec tmux
 fi
 
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
@@ -121,6 +121,8 @@ export VAGRANT_DEFAULT_PROVIDER=libvirt
 export LIBVIRT_DEFAULT_URI=qemu:///system
 
 [[ ! -d "${HOME}/.local/bin" ]] || export PATH=${HOME}/.local/bin:$PATH
+
+[[ ! -d "/mnt/c/" ]] || cd ${HOME}
 
 . ~/.oc_completion
 . ~/.crc_completion
