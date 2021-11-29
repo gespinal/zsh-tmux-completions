@@ -13,7 +13,7 @@ export FZF_DEFAULT_OPTS='--height 40% --layout=reverse --border'
 export VAGRANT_DEFAULT_PROVIDER=libvirt
 export LIBVIRT_DEFAULT_URI=qemu:///system
 
-plugins=(git fzf fzf-tab zsh-syntax-highlighting zsh-completions zsh-history-substring-search zsh-autosuggestions docker kubectl npm kubeps1)
+plugins=(git fzf fzf-tab zsh-syntax-highlighting zsh-completions zsh-history-substring-search zsh-autosuggestions docker kubectl npm)
 
 source $ZSH/oh-my-zsh.sh
 
