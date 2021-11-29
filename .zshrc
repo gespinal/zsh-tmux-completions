@@ -38,4 +38,4 @@ alias vi=vim
 
 #source ~/.oh-my-zsh/custom/zsh-autocomplete/zsh-autocomplete.plugin.zsh
 
-autoload -U compinit; compinit
+autoload -U compinit && compinit
