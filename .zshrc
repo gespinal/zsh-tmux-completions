@@ -10,6 +10,8 @@ ZSH_THEME="powerlevel10k/powerlevel10k"
 
 export ZSH="${HOME}/.oh-my-zsh"
 
+plugins=(git zsh-syntax-highlighting zsh-completions zsh-history-substring-search)
+
 source $ZSH/oh-my-zsh.sh
 
 POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(context dir vcs)
