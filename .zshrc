@@ -21,7 +21,6 @@ export LIBVIRT_DEFAULT_URI=qemu:///system
 
 [[ ! -d "/mnt/c/" ]] || cd ${HOME}
 
-
 [[ ! -f ~/.fzf.zsh ]] || source ~/.fzf.zsh
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
