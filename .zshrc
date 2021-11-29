@@ -22,6 +22,7 @@ export LIBVIRT_DEFAULT_URI=qemu:///system
 [[ ! -d "/mnt/c/" ]] || cd ${HOME}
 
 [[ ! -f ~/.fzf.zsh ]] || source ~/.fzf.zsh
+source ~/.oh-my-zsh/custom/fzf-tab/fzf-tab.zsh
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
 autoload -U compinit && compinit
