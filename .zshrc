@@ -130,6 +130,7 @@ export LIBVIRT_DEFAULT_URI=qemu:///system
 
 [[ ! -f ${HOME}/.local/bin/aws_completer ]] || complete -C `which aws_completer` aws
 [[ ! -f /usr/local/aws/bin/aws_zsh_completer.sh ]] || source /usr/local/aws/bin/aws_zsh_completer.sh
+[[ ! -f /usr/local/aws-cli/v2/current/bin/aws_completer ]] || complete -C /usr/local/aws-cli/v2/current/bin/aws_completer aws
 
 alias vi=vim
 alias podman="sudo podman"
