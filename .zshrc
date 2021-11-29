@@ -1,4 +1,3 @@
-# ZSH_TMUX_AUTOSTART='true'
 if [[ ! $(tmux list-sessions) ]]; then
   exec tmux
 fi
