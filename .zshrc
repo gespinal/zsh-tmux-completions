@@ -9,15 +9,15 @@ fi
 ZSH_THEME="powerlevel10k/powerlevel10k"
 
 export ZSH="${HOME}/.oh-my-zsh"
+export FZF_DEFAULT_OPTS='--height 40% --layout=reverse --border'
+export VAGRANT_DEFAULT_PROVIDER=libvirt
+export LIBVIRT_DEFAULT_URI=qemu:///system
 
-plugins=(git zsh-syntax-highlighting zsh-completions zsh-history-substring-search)
+plugins=(git fzf fzf-tab zsh-syntax-highlighting zsh-completions zsh-history-substring-search)
 
 source $ZSH/oh-my-zsh.sh
 
 POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(context dir vcs)
-
-export VAGRANT_DEFAULT_PROVIDER=libvirt
-export LIBVIRT_DEFAULT_URI=qemu:///system
 
 [[ ! -d "${HOME}/.local/bin" ]] || export PATH=${HOME}/.local/bin:$PATH
 
