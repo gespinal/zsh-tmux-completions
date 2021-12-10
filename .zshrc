@@ -33,7 +33,7 @@ autoload -U compinit && compinit
 [[ ! -f ${HOME}/.local/bin/aws_completer ]] || complete -C `which aws_completer` aws
 [[ ! -f /usr/local/aws/bin/aws_zsh_completer.sh ]] || source /usr/local/aws/bin/aws_zsh_completer.sh
 [[ ! -f /usr/local/bin/aws_completer ]] || complete -C /usr/local/bin/aws_completer aws
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+[ -f ~/.oh-my-zsh/custom/plugins/fzf-tab/fzf-tab.plugin.zsh ] && source ~/.oh-my-zsh/custom/plugins/fzf-tab/fzf-tab.plugin.zsh
 
 alias vi=vim
-
-#source ~/.oh-my-zsh/custom/zsh-autocomplete/zsh-autocomplete.plugin.zsh
