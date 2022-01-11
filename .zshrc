@@ -37,4 +37,5 @@ autoload -U compinit && compinit
 [ -f ~/.oh-my-zsh/custom/plugins/fzf-tab/fzf-tab.plugin.zsh ] && source ~/.oh-my-zsh/custom/plugins/fzf-tab/fzf-tab.plugin.zsh
 
 alias vi=vim
+alias mkstart="minikube start --nodes 3 -p multinode"
 alias nuke="echo nuke | cloud-nuke aws --region us-east-1"
