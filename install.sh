@@ -7,8 +7,14 @@ elif [ -f /etc/debian_version ]; then
 	sudo apt install vim zsh tmux rsync
 fi
 
+# Install kubectl
+sudo curl -L "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl" -o /usr/local/bin/kubectl && sudo chmod +x /usr/local/bin/kubectl
+# Install kubecolor
+wget -O /tmp/kubecolor_0.0.20_Linux_x86_64.tar.gz https://github.com/hidetatz/kubecolor/releases/download/v0.0.20/kubecolor_0.0.20_Linux_x86_64.tar.gz && sudo tar -xvzf /tmp/kubecolor_0.0.20_Linux_x86_64.tar.gz -C /usr/local/bin/ kubecolor && rm /tmp/kubecolor_0.0.20_Linux_x86_64.tar.gz
+# Install Minikube
+sudo curl -L https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64 -o /usr/local/bin/minikube && sudo chmod +x /usr/local/bin/minikube
 # Cloud Nuke
-sudo curl -L https://github.com/gruntwork-io/cloud-nuke/releases/download/v0.7.3/cloud-nuke_linux_amd64 -o /usr/local/bin/cloud-nuke &&  sudo chmod +x /usr/local/bin/cloud-nuke
+sudo curl -L https://github.com/gruntwork-io/cloud-nuke/releases/download/v0.7.3/cloud-nuke_linux_amd64 -o /usr/local/bin/cloud-nuke && sudo chmod +x /usr/local/bin/cloud-nuke
 
 # ZSH
 chsh -s $(which zsh)
