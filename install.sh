@@ -6,6 +6,11 @@ elif [ -f /etc/os-release ] && grep -q "Arch" "/etc/os-release"; then
 elif [ -f /etc/debian_version ]; then
 	sudo apt install vim zsh tmux rsync
 fi
+
+# Cloud Nuke
+sudo curl -L https://github.com/gruntwork-io/cloud-nuke/releases/download/v0.7.3/cloud-nuke_linux_amd64 -o /usr/local/bin/cloud-nuke &&  sudo chmod +x /usr/local/bin/cloud-nuke
+
+# ZSH
 chsh -s $(which zsh)
 [ -d "${HOME}/.oh-my-zsh" ] && rm -rf ${HOME}/.oh-my-zsh 2> /dev/null
 echo exit | sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
