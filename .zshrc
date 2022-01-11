@@ -38,4 +38,5 @@ autoload -U compinit && compinit
 
 alias vi=vim
 alias mkstart="minikube start --nodes 3 -p multinode"
+alias mkstop="minikube stop"
 alias nuke="echo nuke | cloud-nuke aws --region us-east-1"
