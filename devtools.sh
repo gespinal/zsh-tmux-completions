@@ -2,6 +2,12 @@
 sudo apt update -y
 sudo apt upgrade -y
 
+# VSCode
+# sudo apt install software-properties-common apt-transport-https wget
+# wget -q https://packages.microsoft.com/keys/microsoft.asc -O- | sudo apt-key add -
+# sudo add-apt-repository "deb [arch=amd64] https://packages.microsoft.com/repos/vscode stable main"
+# sudo apt install code 
+
 # Docker
 sudo apt-get install apt-transport-https ca-certificates curl software-properties-common gnupg2 pass -y
 curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
@@ -24,14 +30,14 @@ sudo apt-get install -y kubelet kubeadm kubectl
 sudo apt-mark hold kubelet kubeadm kubectl
 
 # Install podman
-sudo apt-get update -y
-sudo apt-get install curl wget gnupg2 -y
-source /etc/os-release
-sh -c "echo 'deb http://download.opensuse.org/repositories/devel:/kubic:/libcontainers:/stable/xUbuntu_${VERSION_ID}/ /' > /etc/apt/sources.list.d/devel:kubic:libcontainers:stable.list"
-wget -nv https://download.opensuse.org/repositories/devel:kubic:libcontainers:stable/xUbuntu_${VERSION_ID}/Release.key -O- | apt-key add -
-apt-get update -qq -y
-apt-get -qq --yes install podman
-podman --version
+#sudo apt-get update -y
+#sudo apt-get install curl wget gnupg2 -y
+#source /etc/os-release
+#sh -c "echo 'deb http://download.opensuse.org/repositories/devel:/kubic:/libcontainers:/stable/xUbuntu_${VERSION_ID}/ /' > /etc/apt/sources.list.d/devel:kubic:libcontainers:stable.list"
+#wget -nv https://download.opensuse.org/repositories/devel:kubic:libcontainers:stable/xUbuntu_${VERSION_ID}/Release.key -O- | apt-key add -
+#apt-get update -qq -y
+#apt-get -qq --yes install podman
+#podman --version
 
 # Docker compose
 sudo curl -L "https://github.com/docker/compose/releases/download/1.29.2/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose && sudo chmod +x /usr/local/bin/docker-compose
@@ -48,6 +54,11 @@ wget -O /tmp/kubecolor_0.0.20_Linux_x86_64.tar.gz https://github.com/hidetatz/ku
 # minikube
 sudo curl -L https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64 -o /usr/local/bin/minikube && sudo chmod +x /usr/local/bin/minikube
 
+# micro_k8s
+sudo systemctl enable --now snapd.socket
+sudo snap install microk8s --classic
+sudo snap install microk8s --classic --channel=1.22/stable
+
 # Install Jenkins
 sudo apt install default-jdk ca-certificates -y
 sudo apt install chromium-browser chromium-chromedriver -y
@@ -55,4 +66,4 @@ wget -q -O - https://pkg.jenkins.io/debian-stable/jenkins.io.key | sudo apt-key 
 sudo sh -c 'echo deb http://pkg.jenkins.io/debian-stable binary/ > /etc/apt/sources.list.d/jenkins.list'
 sudo apt update -y
 sudo apt install jenkins -y
-sudo systemctl enable --now jenkins
+sudo systemctl disable --now jenkins
