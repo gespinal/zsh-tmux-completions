@@ -59,6 +59,10 @@ sudo systemctl enable --now snapd.socket
 sudo snap install microk8s --classic
 sudo snap install microk8s --classic --channel=1.22/stable
 
+# Install scafold
+curl -Lo skaffold https://storage.googleapis.com/skaffold/releases/latest/skaffold-linux-amd64
+sudo install skaffold /usr/local/bin/
+
 # Install Jenkins
 sudo apt install default-jdk ca-certificates -y
 sudo apt install chromium-browser chromium-chromedriver -y
