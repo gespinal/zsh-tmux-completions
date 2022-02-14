@@ -51,23 +51,28 @@ curl --silent --location "https://github.com/weaveworks/eksctl/releases/latest/d
 # kubecolor
 wget -O /tmp/kubecolor_0.0.20_Linux_x86_64.tar.gz https://github.com/hidetatz/kubecolor/releases/download/v0.0.20/kubecolor_0.0.20_Linux_x86_64.tar.gz && sudo tar -xvzf /tmp/kubecolor_0.0.20_Linux_x86_64.tar.gz -C /usr/local/bin/ kubecolor && rm /tmp/kubecolor_0.0.20_Linux_x86_64.tar.gz
 
+# AWS CLI
+curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
+unzip awscliv2.zip
+sudo ./aws/install
+
 # minikube
-sudo curl -L https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64 -o /usr/local/bin/minikube && sudo chmod +x /usr/local/bin/minikube
+# sudo curl -L https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64 -o /usr/local/bin/minikube && sudo chmod +x /usr/local/bin/minikube
 
 # micro_k8s
-sudo systemctl enable --now snapd.socket
-sudo snap install microk8s --classic
-sudo snap install microk8s --classic --channel=1.22/stable
+# sudo systemctl enable --now snapd.socket
+# sudo snap install microk8s --classic
+# sudo snap install microk8s --classic --channel=1.22/stable
 
 # Install scafold
 curl -Lo skaffold https://storage.googleapis.com/skaffold/releases/latest/skaffold-linux-amd64
 sudo install skaffold /usr/local/bin/
 
 # Install Jenkins
-sudo apt install default-jdk ca-certificates -y
-sudo apt install chromium-browser chromium-chromedriver -y
-wget -q -O - https://pkg.jenkins.io/debian-stable/jenkins.io.key | sudo apt-key add -
-sudo sh -c 'echo deb http://pkg.jenkins.io/debian-stable binary/ > /etc/apt/sources.list.d/jenkins.list'
-sudo apt update -y
-sudo apt install jenkins -y
-sudo systemctl disable --now jenkins
+# sudo apt install default-jdk ca-certificates -y
+# sudo apt install chromium-browser chromium-chromedriver -y
+# wget -q -O - https://pkg.jenkins.io/debian-stable/jenkins.io.key | sudo apt-key add -
+# sudo sh -c 'echo deb http://pkg.jenkins.io/debian-stable binary/ > /etc/apt/sources.list.d/jenkins.list'
+# sudo apt update -y
+# sudo apt install jenkins -y
+# sudo systemctl disable --now jenkins
