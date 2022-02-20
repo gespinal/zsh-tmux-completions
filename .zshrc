@@ -26,10 +26,6 @@ POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(context dir vcs)
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
 autoload -U compinit && compinit
-
-[[ ! -f ${HOME}/.oc_completion ]] || source ${HOME}/.oc_completion
-[[ ! -f ${HOME}/.crc_completion ]] || source ${HOME}/.oc_completion
-[[ ! -f ${HOME}/.podman_completion ]] || source ${HOME}/.podman_completion
 [[ ! -f ${HOME}/.local/bin/aws_completer ]] || complete -C `which aws_completer` aws
 [[ ! -f /usr/local/aws/bin/aws_zsh_completer.sh ]] || source /usr/local/aws/bin/aws_zsh_completer.sh
 [[ ! -f /usr/local/bin/aws_completer ]] || complete -C /usr/local/bin/aws_completer aws
@@ -37,6 +33,3 @@ autoload -U compinit && compinit
 [ -f ~/.oh-my-zsh/custom/plugins/fzf-tab/fzf-tab.plugin.zsh ] && source ~/.oh-my-zsh/custom/plugins/fzf-tab/fzf-tab.plugin.zsh
 
 alias vi=vim
-alias mkstart="minikube start --nodes 3 -p multinode"
-alias mkstop="minikube stop"
-alias nuke="echo nuke | cloud-nuke aws --region us-east-1"
