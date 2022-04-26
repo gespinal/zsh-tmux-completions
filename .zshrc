@@ -34,4 +34,6 @@ autoload -U compinit && compinit
 
 source <(kubectl completion zsh)
 
+export DOCKER_BUILDKIT=1 
+
 alias vi=vim
