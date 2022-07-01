@@ -68,7 +68,7 @@ sudo ./aws/install
 curl -Lo skaffold https://storage.googleapis.com/skaffold/releases/latest/skaffold-linux-amd64
 sudo install skaffold /usr/local/bin/
 
-# Install Jenkins
+# Jenkins
 # sudo apt install default-jdk ca-certificates -y
 # sudo apt install chromium-browser chromium-chromedriver -y
 # wget -q -O - https://pkg.jenkins.io/debian-stable/jenkins.io.key | sudo apt-key add -
@@ -76,3 +76,9 @@ sudo install skaffold /usr/local/bin/
 # sudo apt update -y
 # sudo apt install jenkins -y
 # sudo systemctl disable --now jenkins
+
+# Terraform
+sudo apt-get update && sudo apt-get install -y gnupg software-properties-common curl
+curl -fsSL https://apt.releases.hashicorp.com/gpg | sudo apt-key add -
+sudo apt-add-repository "deb [arch=amd64] https://apt.releases.hashicorp.com $(lsb_release -cs) main"
+sudo apt-get update && sudo apt-get install terraform
