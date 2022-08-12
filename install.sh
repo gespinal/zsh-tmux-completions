@@ -7,6 +7,11 @@ elif [ -f /etc/debian_version ]; then
 	sudo apt install vim zsh tmux rsync
 fi
 
+# Fonts
+mkdir ~/.fonts
+cp -rp ./fonts/*.ttf ~/.fonts
+fc-cache -f -v
+
 # ZSH
 chsh -s $(which zsh)
 [ -d "${HOME}/.oh-my-zsh" ] && rm -rf ${HOME}/.oh-my-zsh 2> /dev/null
