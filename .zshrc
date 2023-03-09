@@ -38,4 +38,17 @@ kubectl config use-context kind-kind 2>/dev/null
 
 export DOCKER_BUILDKIT=1 
 
-alias vi=vim
+
+if type brew &>/dev/null; then
+  FPATH=$(brew --prefix)/share/zsh-completions:$(brew --prefix)/share/zsh/site-functions:$FPATH
+
+  autoload -Uz compinit
+  compinit
+fi
+
+export HISTSIZE=999999999
+export SAVEHIST=$HISTSIZE
+export HISTFILE="$HOME/.history"
+setopt hist_ignore_all_dups
+setopt hist_ignore_space
+
