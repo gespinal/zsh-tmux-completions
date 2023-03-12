@@ -38,12 +38,15 @@ kubectl config use-context kind-kind 2>/dev/null
 
 export DOCKER_BUILDKIT=1 
 
-
 if type brew &>/dev/null; then
   FPATH=$(brew --prefix)/share/zsh-completions:$(brew --prefix)/share/zsh/site-functions:$FPATH
-
   autoload -Uz compinit
   compinit
+fi
+
+if type terraform &>/dev/null; then
+  autoload -U +X bashcompinit && bashcompinit
+  complete -o nospace -C /usr/local/bin/terraform terraform
 fi
 
 export HISTSIZE=999999999

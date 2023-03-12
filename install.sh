@@ -1,16 +1,26 @@
 #!/bin/bash
 if [ -f /etc/redhat-release ]; then
-	sudo dnf -y install vim zsh tmux util-linux-user rsync
+  sudo dnf -y install vim zsh tmux util-linux-user rsync
 elif [ -f /etc/os-release ] && grep -q "Arch" "/etc/os-release"; then
-	sudo pacman -S vim zsh tmux rsync
+  sudo pacman -S vim zsh tmux rsync
 elif [ -f /etc/debian_version ]; then
-	sudo apt install vim zsh tmux rsync
+  sudo apt install vim zsh tmux rsync
 fi
 
 # Fonts
-mkdir ~/.fonts
-cp -rp ./fonts/*.ttf ~/.fonts
-fc-cache -f -v
+if [[ "$OSTYPE" == "linux-gnu"* ]]; then
+  mkdir ~/.fonts
+  cp -rp $PWD/fonts/*.ttf ~/.fonts
+  fc-cache -f -v
+elif [[ "$OSTYPE" == "darwin"* ]]; then
+  cp $PWD/fonts/*.ttf ~/Library/Fonts/ 
+fi
+
+# macOS
+# Fix for Insecure completion-dependent directories detected
+if [[ "$OSTYPE" == "darwin"* ]]; then
+  sudo chmod -R go-w /opt/homebrew/share
+fi
 
 # ZSH
 chsh -s $(which zsh)
