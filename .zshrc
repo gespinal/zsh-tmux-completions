@@ -55,3 +55,4 @@ export HISTFILE="$HOME/.history"
 setopt hist_ignore_all_dups
 setopt hist_ignore_space
 
+unset AWS_SESSION_TOKEN AWS_ACCESS_KEY_ID AWS_SECRET_ACCESS_KEY
