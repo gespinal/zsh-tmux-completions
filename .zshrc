@@ -34,6 +34,8 @@ autoload -U compinit && compinit
 
 source <(kubectl completion zsh 2> /dev/null)
 
+alias k=kubectl                                                                                                         complete -o default -F __start_kubectl k
+
 export DOCKER_BUILDKIT=1 
 
 if type brew &>/dev/null; then
