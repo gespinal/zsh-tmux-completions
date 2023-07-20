@@ -42,8 +42,7 @@ export DOCKER_BUILDKIT=1
 
 if type brew &>/dev/null; then
   FPATH=$(brew --prefix)/share/zsh-completions:$(brew --prefix)/share/zsh/site-functions:$FPATH
-  autoload -Uz compinit
-  compinit
+  autoload -U +X bashcompinit && bashcompinit
 fi
 
 if type terraform &>/dev/null; then
