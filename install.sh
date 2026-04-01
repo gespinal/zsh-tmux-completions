@@ -317,7 +317,7 @@ install_kubectl() {
 install_docker() {
   case "$PLATFORM" in
     macos)
-      warn "Install Docker Desktop from https://www.docker.com/products/docker-desktop/"
+      warn "Install OrbStack from https://orbstack.dev/"
       return 0 ;;
     linux|wsl)
       sudo install -m 0755 -d /etc/apt/keyrings
