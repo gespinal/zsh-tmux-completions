@@ -6,7 +6,8 @@
       "WebFetch(domain:developer.hashicorp.com)",
       "WebFetch(domain:aws.amazon.com)",
       "WebFetch(domain:skaffold.dev)",
-      "WebFetch(domain:ohmyz.sh)"
+      "WebFetch(domain:ohmyz.sh)",
+      "Bash(python3 -c 'import json,random;q=random.choice\\(json.load\\(open\\('\\\\''__TRACKED_VAR__/quotes.json'\\\\''\\)\\)\\);print\\(q['\\\\''text'\\\\''] + '\\\\''  -- '\\\\'' + q['\\\\''author'\\\\'']\\)')"
     ]
   }
 }

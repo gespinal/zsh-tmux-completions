@@ -327,7 +327,7 @@ tmux_conf_copy_to_os_clipboard=true
 # this is the place to override or undo settings
 
 # increase history size
-#set -g history-limit 10000
+#set -g history-limit 999999999
 
 # start with mouse mode enabled
 #set -g mouse on
@@ -349,6 +349,7 @@ tmux_conf_copy_to_os_clipboard=true
 
 # copy selection to clipboard on mouse drag release (no extra keypress needed)
 bind -T copy-mode-vi MouseDragEnd1Pane send-keys -X copy-selection-and-cancel
+
 
 # -- tpm -----------------------------------------------------------------------
 

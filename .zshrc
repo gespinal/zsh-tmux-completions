@@ -100,3 +100,16 @@ claude-personal() {
   export CLAUDE_CODE_USE_BEDROCK=0
   echo "Claude Code personal mode enabled"
 }
+
+# --- Welcome ---
+if [[ -f ~/quotes.json ]] && command -v python3 &>/dev/null; then
+  _quote=$(python3 -c "import json,random;q=random.choice(json.load(open('$HOME/quotes.json')));print(q['text'] + '  -- ' + q['author'])" 2>/dev/null)
+else
+  _quote=""
+fi
+echo ""
+echo "\033[1mLet's go!\033[0m"
+[[ -n "$_quote" ]] && echo "$_quote"
+echo "\033[2mToday is\033[0m \033[1m$(date '+%A, %B %d %Y — %H:%M:%S')\033[0m"
+echo ""
+unset _quote
