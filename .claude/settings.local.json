@@ -7,7 +7,13 @@
       "WebFetch(domain:aws.amazon.com)",
       "WebFetch(domain:skaffold.dev)",
       "WebFetch(domain:ohmyz.sh)",
-      "Bash(python3 -c 'import json,random;q=random.choice\\(json.load\\(open\\('\\\\''__TRACKED_VAR__/quotes.json'\\\\''\\)\\)\\);print\\(q['\\\\''text'\\\\''] + '\\\\''  -- '\\\\'' + q['\\\\''author'\\\\'']\\)')"
+      "Bash(python3 -c 'import json,random;q=random.choice\\(json.load\\(open\\('\\\\''__TRACKED_VAR__/quotes.json'\\\\''\\)\\)\\);print\\(q['\\\\''text'\\\\''] + '\\\\''  -- '\\\\'' + q['\\\\''author'\\\\'']\\)')",
+      "Bash(tmux show-option:*)",
+      "Bash(tmux show-options:*)",
+      "Bash(tmux list-keys:*)",
+      "Bash(tmux source-file:*)",
+      "Bash(tmux:*)",
+      "Bash(*)"
     ]
   }
 }
