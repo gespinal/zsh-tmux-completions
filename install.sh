@@ -65,6 +65,7 @@ tool_cmd() {
     "npm")        echo "npm" ;;
     "AWS CDK")    echo "cdk" ;;
     "Claude Code") echo "claude" ;;
+    "zoxide")      echo "zoxide" ;;
   esac
 }
 
@@ -404,6 +405,15 @@ install_aws_cdk() {
   npm install -g aws-cdk
 }
 
+# --- zoxide ---
+install_zoxide() {
+  case "$PLATFORM" in
+    macos) brew install zoxide ;;
+    linux|wsl)
+      curl -sSfL https://raw.githubusercontent.com/ajeetdsouza/zoxide/main/install.sh | sh ;;
+  esac
+}
+
 # --- Claude Code ---
 install_claude_code() {
   npm install -g @anthropic-ai/claude-code
@@ -445,6 +455,9 @@ confirm "Skaffold"   && install_skaffold   && INSTALLED+=("Skaffold")
 confirm "cloud-nuke" && install_cloud_nuke && INSTALLED+=("cloud-nuke")
 confirm "eksctl"     && install_eksctl     && INSTALLED+=("eksctl")
 confirm "kubecolor"  && install_kubecolor  && INSTALLED+=("kubecolor")
+
+section "Shell tools"
+confirm "zoxide"      && install_zoxide      && INSTALLED+=("zoxide")
 
 section "AI tools"
 confirm "Claude Code" && install_claude_code && INSTALLED+=("Claude Code")
