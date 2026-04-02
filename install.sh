@@ -108,7 +108,7 @@ install_packages() {
         sudo pacman -S --noconfirm vim zsh tmux rsync fzf
       elif [ -f /etc/debian_version ]; then
         sudo apt-get update
-        sudo apt-get install -y vim zsh tmux rsync fzf unzip curl wget gnupg
+        sudo apt-get install -y vim zsh tmux rsync fzf unzip curl wget gnupg fontconfig
       fi
       ;;
   esac
