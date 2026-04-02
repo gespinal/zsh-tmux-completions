@@ -100,3 +100,11 @@ claude-personal() {
   export CLAUDE_CODE_USE_BEDROCK=0
   echo "Claude Code personal mode enabled"
 }
+
+# --- Remote tmux: purple accent over SSH ---
+if [[ -n "$TMUX" ]] && [[ "$_P9K_SSH_TTY" == /dev/pts/* ]]; then
+  tmux set -g status-left '#[fg=black,bg=#a3be8c,bold] #S #[fg=#a3be8c,bg=black,nobold,noitalics,nounderscore]'
+  tmux set -g status-right '#[fg=#a3be8c,bg=black]#[fg=black,bg=#a3be8c,bold] #H '
+  tmux set -g window-status-current-format '#[fg=black,bg=#a3be8c,nobold,noitalics,nounderscore] #[fg=black,bg=#a3be8c]#I #[fg=black,bg=#a3be8c,nobold,noitalics,nounderscore] #[fg=black,bg=#a3be8c]#W #F #[fg=#a3be8c,bg=black,nobold,noitalics,nounderscore]'
+fi
+
