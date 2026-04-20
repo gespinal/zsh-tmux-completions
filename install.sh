@@ -70,6 +70,7 @@ tool_cmd() {
 }
 
 INSTALL_ALL=false
+INSTALL_NONE=false
 
 confirm() {
   local cmd
@@ -83,6 +84,9 @@ confirm() {
   if [[ "$INSTALL_ALL" == "true" ]]; then
     info "Installing $1..."
     return 0
+  fi
+  if [[ "$INSTALL_NONE" == "true" ]]; then
+    return 1
   fi
   read -rp "$(echo -e "  Install ${BOLD}$1${RESET}? [y/N] ")" answer
   if [[ "$answer" =~ ^[Yy]$ ]]; then
@@ -521,16 +525,30 @@ echo -e "  ${BOLD}AI tools${RESET}"
 echo -e "    ${DIM}•${RESET} Claude Code — Anthropic's AI coding assistant (requires npm)"
 echo ""
 
-read -rp "$(echo -e "  Install ${BOLD}all${RESET} optional tools? [y/N] ")" install_all_answer
+echo -e "  ${BOLD}a${RESET}) Install all"
+echo -e "  ${BOLD}n${RESET}) Install none"
+echo -e "  ${BOLD}1${RESET}) Choose one by one"
+echo ""
+read -rp "$(echo -e "  Choice [a/n/1]: ")" install_choice
 echo ""
 
-if [[ "$install_all_answer" =~ ^[Yy]$ ]]; then
-  INSTALL_ALL=true
-  info "Installing all optional tools..."
-else
-  INSTALL_ALL=false
-  info "Going one by one. Press y/Y to install each tool (default: N)."
-fi
+case "$install_choice" in
+  [Aa])
+    INSTALL_ALL=true
+    INSTALL_NONE=false
+    info "Installing all optional tools..."
+    ;;
+  [Nn])
+    INSTALL_ALL=false
+    INSTALL_NONE=true
+    info "Skipping all optional tools."
+    ;;
+  *)
+    INSTALL_ALL=false
+    INSTALL_NONE=false
+    info "Going one by one. Press y/Y to install each tool (default: N)."
+    ;;
+esac
 
 INSTALLED=()
 
