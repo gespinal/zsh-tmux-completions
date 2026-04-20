@@ -205,10 +205,29 @@ install_omz() {
   clone_plugin zsh-autosuggestions https://github.com/zsh-users/zsh-autosuggestions.git "$ZSH_CUSTOM/plugins/zsh-autosuggestions"
   clone_plugin fzf-tab https://github.com/Aloxaf/fzf-tab.git "$ZSH_CUSTOM/plugins/fzf-tab"
 
-  if [ ! -d "$HOME/.fzf" ] && ! command -v fzf &>/dev/null; then
-    info "Installing fzf..."
-    git clone --depth=1 https://github.com/junegunn/fzf.git ~/.fzf
-    ~/.fzf/install --all --no-bash --no-fish
+  # fzf: apt/pkg repos ship outdated versions. Install from GitHub releases
+  # to ensure --zsh flag support (requires v0.48.0+).
+  local fzf_min="0.48.0"
+  local fzf_current
+  fzf_current=$(fzf --version 2>/dev/null | awk '{print $1}' || echo "0.0.0")
+  if ! command -v fzf &>/dev/null || \
+     [ "$(printf '%s\n' "$fzf_min" "$fzf_current" | sort -V | head -1)" != "$fzf_min" ]; then
+    info "Installing fzf from GitHub releases (apt version too old)..."
+    local fzf_ver arch_suffix
+    fzf_ver=$(curl -s https://api.github.com/repos/junegunn/fzf/releases/latest \
+      | grep '"tag_name"' | cut -d'"' -f4 | tr -d 'v')
+    case "$(uname -m)" in
+      x86_64)  arch_suffix="linux_amd64" ;;
+      aarch64) arch_suffix="linux_arm64" ;;
+      *)       warn "Unknown arch, skipping fzf install"; arch_suffix="" ;;
+    esac
+    if [ -n "$arch_suffix" ]; then
+      curl -sL "https://github.com/junegunn/fzf/releases/download/v${fzf_ver}/fzf-${fzf_ver}-${arch_suffix}.tar.gz" \
+        | sudo tar -xz -C /usr/local/bin fzf
+      ok "fzf $(fzf --version | awk '{print $1}') installed"
+    fi
+  else
+    ok "fzf $fzf_current already meets minimum version ($fzf_min)"
   fi
 }
 

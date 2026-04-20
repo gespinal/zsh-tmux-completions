@@ -55,8 +55,8 @@ if command -v terraform &>/dev/null; then
   complete -o nospace -C "$(which terraform)" terraform
 fi
 
-# fzf
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+# fzf — requires v0.48.0+ for --zsh flag (install.sh handles this)
+command -v fzf &>/dev/null && eval "$(fzf --zsh)"
 [ -f ~/.oh-my-zsh/custom/plugins/fzf-tab/fzf-tab.plugin.zsh ] && source ~/.oh-my-zsh/custom/plugins/fzf-tab/fzf-tab.plugin.zsh
 
 # --- zoxide ---
