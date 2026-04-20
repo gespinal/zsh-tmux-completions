@@ -320,12 +320,40 @@ install_kubectl() {
   esac
 }
 
-# --- Docker ---
+# --- Docker (OrbStack on macOS, Docker CE on Linux/WSL) ---
 install_docker() {
   case "$PLATFORM" in
     macos)
-      warn "Install OrbStack from https://orbstack.dev/"
-      return 0 ;;
+      brew install orbstack
+      local plist="$HOME/Library/LaunchAgents/dev.orbstack.start.plist"
+      if [ ! -f "$plist" ]; then
+        mkdir -p "$HOME/Library/LaunchAgents"
+        cat > "$plist" <<'PLIST'
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+  <key>Label</key>
+  <string>dev.orbstack.start</string>
+  <key>ProgramArguments</key>
+  <array>
+    <string>/opt/homebrew/bin/orb</string>
+    <string>start</string>
+  </array>
+  <key>RunAtLoad</key>
+  <true/>
+  <key>StandardOutPath</key>
+  <string>/tmp/orbstack.log</string>
+  <key>StandardErrorPath</key>
+  <string>/tmp/orbstack.err</string>
+</dict>
+</plist>
+PLIST
+        launchctl load "$plist" 2>/dev/null || true
+        ok "LaunchAgent installed — OrbStack will start at login"
+      else
+        info "LaunchAgent already exists, skipping"
+      fi ;;
     linux|wsl)
       sudo install -m 0755 -d /etc/apt/keyrings
       curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg
@@ -460,7 +488,7 @@ echo -e "    ${DIM}•${RESET} Terraform  — infrastructure-as-code (HashiCorp)
 echo -e "    ${DIM}•${RESET} kubectl    — Kubernetes CLI"
 echo ""
 echo -e "  ${BOLD}Containers & orchestration${RESET}"
-echo -e "    ${DIM}•${RESET} Docker     — container runtime (OrbStack on macOS)"
+echo -e "    ${DIM}•${RESET} Docker     — OrbStack on macOS (brew + LaunchAgent), Docker CE on Linux/WSL"
 echo -e "    ${DIM}•${RESET} Helm       — Kubernetes package manager"
 echo -e "    ${DIM}•${RESET} Skaffold   — local Kubernetes development workflow"
 echo -e "    ${DIM}•${RESET} cloud-nuke — bulk AWS resource cleanup (Gruntwork)"

@@ -127,14 +127,14 @@ Tools that are already installed are detected automatically (via `command -v`) a
 
 | Tool | What it installs | macOS | Linux/WSL |
 |---|---|---|---|
-| **Docker** | Container runtime | Prints link to [OrbStack](https://orbstack.dev/) | Adds Docker's apt repo + GPG key, installs `docker-ce` + plugins, adds user to `docker` group |
+| **Docker** | Container runtime | `brew install orbstack` + installs `~/Library/LaunchAgents/dev.orbstack.start.plist` to auto-start at login | Adds Docker's apt repo + GPG key, installs `docker-ce` + plugins, adds user to `docker` group |
 | **Helm** | Kubernetes package manager | `brew install helm` | Official get-helm-3 install script |
 | **Skaffold** | Local Kubernetes dev workflow | `brew install skaffold` | Downloads binary from GCS, installs to `/usr/local/bin` |
 | **cloud-nuke** | Bulk AWS resource cleanup (Gruntwork) | `brew install cloud-nuke` | Downloads latest release binary from GitHub, installs to `/usr/local/bin` |
 | **eksctl** | Amazon EKS cluster manager | `brew install eksctl` | Downloads tarball from GitHub releases, extracts to `/usr/local/bin` |
 | **kubecolor** | Colorized `kubectl` output | `brew install kubecolor/tap/kubecolor` | Downloads latest release tarball from GitHub, extracts to `/usr/local/bin` |
 
-> **Docker on macOS:** The installer intentionally does not install Docker Desktop (licensing). It points you to OrbStack instead.
+> **Docker on macOS:** Installs [OrbStack](https://orbstack.dev/) via Homebrew (avoids Docker Desktop licensing). Also writes `~/Library/LaunchAgents/dev.orbstack.start.plist` so OrbStack starts automatically at login via `launchctl`. If the plist already exists it is left untouched.
 
 > **Docker group on Linux:** After installing Docker, you must log out and back in (or run `newgrp docker`) before your user can run `docker` without `sudo`.
 
