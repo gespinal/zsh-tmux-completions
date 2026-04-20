@@ -73,6 +73,9 @@ INSTALL_ALL=false
 INSTALL_NONE=false
 
 confirm() {
+  if [[ "$INSTALL_NONE" == "true" ]]; then
+    return 1
+  fi
   local cmd
   cmd=$(tool_cmd "$1")
   if command -v "$cmd" &>/dev/null; then
@@ -84,9 +87,6 @@ confirm() {
   if [[ "$INSTALL_ALL" == "true" ]]; then
     info "Installing $1..."
     return 0
-  fi
-  if [[ "$INSTALL_NONE" == "true" ]]; then
-    return 1
   fi
   read -rp "$(echo -e "  Install ${BOLD}$1${RESET}? [y/N] ")" answer
   if [[ "$answer" =~ ^[Yy]$ ]]; then
