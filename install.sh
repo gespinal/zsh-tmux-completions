@@ -69,6 +69,8 @@ tool_cmd() {
   esac
 }
 
+INSTALL_ALL=false
+
 confirm() {
   local cmd
   cmd=$(tool_cmd "$1")
@@ -77,6 +79,10 @@ confirm() {
     ver=$("$cmd" --version 2>/dev/null | head -1 || echo "")
     ok "${BOLD}$1${RESET}${GREEN} already installed${RESET} ${DIM}($ver)${RESET}"
     return 1
+  fi
+  if [[ "$INSTALL_ALL" == "true" ]]; then
+    info "Installing $1..."
+    return 0
   fi
   read -rp "$(echo -e "  Install ${BOLD}$1${RESET}? [y/N] ")" answer
   if [[ "$answer" =~ ^[Yy]$ ]]; then
@@ -430,9 +436,48 @@ install_omz
 set_default_shell
 deploy_dotfiles
 
+# --- Optional dev tools ---
 header "Optional dev tools"
-info "Default: N for all"
+
+echo -e "\n  ${BOLD}The following tools can be installed:${RESET}\n"
+
+echo -e "  ${BOLD}Version control & managers${RESET}"
+echo -e "    ${DIM}•${RESET} git       — distributed version control"
+echo -e "    ${DIM}•${RESET} asdf      — multi-runtime version manager"
+echo -e "    ${DIM}•${RESET} tfenv     — Terraform version manager"
+echo -e "    ${DIM}•${RESET} npm       — Node.js package manager (installs Node LTS)"
 echo ""
+echo -e "  ${BOLD}Cloud CLI & IaC${RESET}"
+echo -e "    ${DIM}•${RESET} AWS CLI v2 — official AWS command-line interface"
+echo -e "    ${DIM}•${RESET} AWS CDK    — AWS Cloud Development Kit (requires npm)"
+echo -e "    ${DIM}•${RESET} Terraform  — infrastructure-as-code (HashiCorp)"
+echo -e "    ${DIM}•${RESET} kubectl    — Kubernetes CLI"
+echo ""
+echo -e "  ${BOLD}Containers & orchestration${RESET}"
+echo -e "    ${DIM}•${RESET} Docker     — container runtime (OrbStack on macOS)"
+echo -e "    ${DIM}•${RESET} Helm       — Kubernetes package manager"
+echo -e "    ${DIM}•${RESET} Skaffold   — local Kubernetes development workflow"
+echo -e "    ${DIM}•${RESET} cloud-nuke — bulk AWS resource cleanup (Gruntwork)"
+echo -e "    ${DIM}•${RESET} eksctl     — Amazon EKS cluster manager"
+echo -e "    ${DIM}•${RESET} kubecolor  — colorized kubectl output"
+echo ""
+echo -e "  ${BOLD}Shell tools${RESET}"
+echo -e "    ${DIM}•${RESET} zoxide     — smarter cd with frecency ranking"
+echo ""
+echo -e "  ${BOLD}AI tools${RESET}"
+echo -e "    ${DIM}•${RESET} Claude Code — Anthropic's AI coding assistant (requires npm)"
+echo ""
+
+read -rp "$(echo -e "  Install ${BOLD}all${RESET} optional tools? [y/N] ")" install_all_answer
+echo ""
+
+if [[ "$install_all_answer" =~ ^[Yy]$ ]]; then
+  INSTALL_ALL=true
+  info "Installing all optional tools..."
+else
+  INSTALL_ALL=false
+  info "Going one by one. Press y/Y to install each tool (default: N)."
+fi
 
 INSTALLED=()
 
