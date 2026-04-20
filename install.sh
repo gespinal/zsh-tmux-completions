@@ -66,7 +66,6 @@ tool_cmd() {
     "AWS CDK")    echo "cdk" ;;
     "Claude Code") echo "claude" ;;
     "zoxide")      echo "zoxide" ;;
-    "unzip")       echo "unzip" ;;
   esac
 }
 
@@ -475,14 +474,6 @@ install_zoxide() {
   esac
 }
 
-# --- unzip ---
-install_unzip() {
-  case "$PLATFORM" in
-    macos)     brew install unzip ;;
-    linux|wsl) sudo apt-get install -y unzip ;;
-  esac
-}
-
 # --- Claude Code ---
 install_claude_code() {
   case "$PLATFORM" in
@@ -583,7 +574,6 @@ confirm "kubecolor"  && install_kubecolor  && INSTALLED+=("kubecolor")
 
 section "Shell tools"
 confirm "zoxide"      && install_zoxide      && INSTALLED+=("zoxide")
-confirm "unzip"       && install_unzip       && INSTALLED+=("unzip")
 
 section "AI tools"
 confirm "Claude Code" && install_claude_code && INSTALLED+=("Claude Code")
