@@ -143,6 +143,7 @@ Tools that are already installed are detected automatically (via `command -v`) a
 | Tool | What it installs | macOS | Linux/WSL |
 |---|---|---|---|
 | **zoxide** | Smarter `cd` with frecency-based directory jumping | `brew install zoxide` | Official install script from GitHub |
+| **unzip** | Unzip utility | `brew install unzip` | `apt-get install unzip` |
 
 #### AI tools
 
