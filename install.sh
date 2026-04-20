@@ -408,7 +408,10 @@ install_npm() {
 
 # --- AWS CDK ---
 install_aws_cdk() {
-  npm install -g aws-cdk
+  case "$PLATFORM" in
+    macos) npm install -g aws-cdk ;;
+    linux|wsl) sudo npm install -g aws-cdk ;;
+  esac
 }
 
 # --- zoxide ---
@@ -422,7 +425,10 @@ install_zoxide() {
 
 # --- Claude Code ---
 install_claude_code() {
-  npm install -g @anthropic-ai/claude-code
+  case "$PLATFORM" in
+    macos) npm install -g @anthropic-ai/claude-code ;;
+    linux|wsl) sudo npm install -g @anthropic-ai/claude-code ;;
+  esac
 }
 
 # =============================================================================

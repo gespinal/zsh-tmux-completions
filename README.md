@@ -119,7 +119,7 @@ Tools that are already installed are detected automatically (via `command -v`) a
 | Tool | What it installs | macOS | Linux/WSL |
 |---|---|---|---|
 | **AWS CLI v2** | Official AWS command-line interface | `brew install awscli` | Downloads official zip from `awscli.amazonaws.com`, runs `install --update` |
-| **AWS CDK** | AWS Cloud Development Kit | `npm install -g aws-cdk` | Same (requires npm) |
+| **AWS CDK** | AWS Cloud Development Kit | `npm install -g aws-cdk` | `sudo npm install -g aws-cdk` (requires npm) |
 | **Terraform** | HashiCorp infrastructure-as-code CLI | `brew tap hashicorp/tap && brew install` | Adds HashiCorp apt repo + GPG key, then `apt install terraform` |
 | **kubectl** | Kubernetes CLI | `brew install kubectl` | Downloads latest stable binary from `dl.k8s.io`, installs to `/usr/local/bin` |
 
@@ -148,7 +148,7 @@ Tools that are already installed are detected automatically (via `command -v`) a
 
 | Tool | What it installs | macOS | Linux/WSL |
 |---|---|---|---|
-| **Claude Code** | Anthropic's AI coding assistant CLI | `npm install -g @anthropic-ai/claude-code` | Same (requires npm) |
+| **Claude Code** | Anthropic's AI coding assistant CLI | `npm install -g @anthropic-ai/claude-code` | `sudo npm install -g @anthropic-ai/claude-code` (requires npm) |
 
 ---
 
