@@ -95,6 +95,19 @@ fundamentals() {
   python3 ~/projects/personal/value-investing-fundamentals/fundamentals.py "$1"
 }
 
+# Run a command under a specific AWS profile, bypassing any active session env vars.
+# Safe to use inside a Bedrock/Claude Code session — parent env is unaffected.
+# Usage: aws-profile <profile-name> <command> [args...]
+# Example: aws-profile nwn-ai-sbx python3 scripts/user-report.py --user foo@bar.com
+aws-profile() {
+  local profile=$1
+  shift
+  (
+    unset AWS_ACCESS_KEY_ID AWS_SECRET_ACCESS_KEY AWS_SESSION_TOKEN AWS_PROFILE
+    AWS_PROFILE=$profile "$@"
+  )
+}
+
 # Claude Code: Bedrock vs personal mode
 claude-work() {
   export CLAUDE_CODE_USE_BEDROCK=1
