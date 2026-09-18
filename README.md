@@ -210,6 +210,17 @@ Tools that are already installed are detected automatically (via `command -v`) a
 
 ---
 
+## Shell Functions
+
+| Function | What it does |
+|---|---|
+| `aws-profile <profile> <cmd> [args...]` | Runs `<cmd>` with `AWS_PROFILE=<profile>` in a subshell, after unsetting any `AWS_ACCESS_KEY_ID` / `AWS_SECRET_ACCESS_KEY` / `AWS_SESSION_TOKEN` / `AWS_PROFILE` already in the environment. Your current shell is untouched, so stray session credentials can't leak into the command. Example: `aws-profile my-profile aws s3 ls` |
+| `_gh_dir_identity` (opt-in) | `chpwd` hook that switches the active `gh` account when you `cd` into a mapped directory tree. Inert until you set the map in `.zshrc`: `GH_DIR_IDENTITY=( "$HOME/projects/work" work-account "$HOME/projects/oss" my-handle )`. Longest matching directory wins; it only calls `gh auth switch` when the active account differs. |
+
+`aws-profile` has tab completion: the first argument completes profile names read straight from `~/.aws/config` and `~/.aws/credentials` (honoring `AWS_CONFIG_FILE` / `AWS_SHARED_CREDENTIALS_FILE`; `[sso-session ...]` blocks are skipped), and later arguments complete as the wrapped command would. It parses the files rather than calling `aws configure list-profiles`, which starts Python and lags on every `<TAB>`.
+
+---
+
 ## Re-running the Installer
 
 The installer is idempotent — safe to re-run at any time:

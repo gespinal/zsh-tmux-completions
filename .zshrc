@@ -95,11 +95,15 @@ fundamentals() {
   python3 ~/projects/personal/value-investing-fundamentals/fundamentals.py "$1"
 }
 
-# Run a command under a specific AWS profile, bypassing any active session env vars.
-# Safe to use inside a Bedrock/Claude Code session — parent env is unaffected.
-# Usage: aws-profile <profile-name> <command> [args...]
-# Example: aws-profile nwn-ai-sbx python3 scripts/user-report.py --user foo@bar.com
+# Run a command under a specific AWS profile, bypassing any credentials already in the
+# environment. Runs in a subshell, so the calling shell's env is left untouched.
+# Usage:   aws-profile <profile-name> <command> [args...]
+# Example: aws-profile my-profile aws s3 ls
 aws-profile() {
+  if (( $# < 2 )); then
+    echo "Usage: aws-profile <profile-name> <command> [args...]" >&2
+    return 1
+  fi
   local profile=$1
   shift
   (
@@ -107,6 +111,54 @@ aws-profile() {
     AWS_PROFILE=$profile "$@"
   )
 }
+
+# Tab-complete aws-profile: profile names first, then whatever the wrapped command completes.
+# Reads ~/.aws/config and ~/.aws/credentials directly — `aws configure list-profiles`
+# starts Python and makes every <TAB> lag.
+_aws-profile() {
+  if (( CURRENT == 2 )); then
+    local -a profiles
+    local f expl
+    for f in "${AWS_CONFIG_FILE:-$HOME/.aws/config}" "${AWS_SHARED_CREDENTIALS_FILE:-$HOME/.aws/credentials}"; do
+      [[ -r "$f" ]] && profiles+=(${(f)"$(sed -n -e 's/^\[profile \(.*\)\]/\1/p' -e 's/^\[\([^ ]*\)\]/\1/p' "$f")"})
+    done
+    profiles=(${(u)profiles})
+    _wanted profiles expl 'AWS profile' compadd -a profiles
+  else
+    shift words
+    (( CURRENT-- ))
+    _normal
+  fi
+}
+compdef _aws-profile aws-profile
+
+# --- gh per-directory identity (opt-in) ---
+# Switches the active `gh` account when you cd into a mapped project tree, so PRs and API
+# calls run as the right GitHub user. Does nothing until you fill in the map, e.g.:
+#   GH_DIR_IDENTITY=( "$HOME/projects/work" work-account  "$HOME/projects/oss" my-handle )
+# The longest matching directory wins. Reads the active account from hosts.yml (no gh
+# call) and only switches when it differs.
+typeset -A GH_DIR_IDENTITY
+_gh_dir_identity() {
+  emulate -L zsh
+  (( ${#GH_DIR_IDENTITY} )) || return 0
+  command -v gh >/dev/null 2>&1 || return 0
+  local dir account="" best=0
+  for dir in ${(k)GH_DIR_IDENTITY}; do
+    if [[ "$PWD/" == "${dir%/}/"* ]] && (( ${#dir} > best )); then
+      best=${#dir}
+      account=${GH_DIR_IDENTITY[$dir]}
+    fi
+  done
+  [[ -n "$account" ]] || return 0
+  local hosts="${GH_CONFIG_DIR:-$HOME/.config/gh}/hosts.yml" current=""
+  [[ -r "$hosts" ]] && current=$(awk '$1=="user:"{print $2; exit}' "$hosts")
+  [[ "$current" == "$account" ]] && return 0
+  gh auth switch --hostname github.com --user "$account" >/dev/null 2>&1
+}
+autoload -Uz add-zsh-hook
+add-zsh-hook chpwd _gh_dir_identity
+_gh_dir_identity   # apply to the directory this shell starts in
 
 # Claude Code: Bedrock vs personal mode
 claude-work() {
