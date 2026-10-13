@@ -40,4 +40,4 @@ When modifying `install.sh`:
 - Platform detection via `detect_platform()` returns: `macos`, `linux`, `wsl`, `windows`
 - Always test on Linux (Ubuntu 24.04) and macOS after changes
 
-After any change: commit and push. Update `~/.claude/CLAUDE.md` and `~/projects/personal/home-lab-utilz/CLAUDE.md` if the change affects how the repo is used or installed.
+After a change that alters behavior or install flow: commit and push this repo's files — EXCEPT any commit touching a CLAUDE.md, which must not be pushed without explicit approval in that session (global push gate: show the diff and ask first). If the change affects how the repo is used or installed, also update `~/.claude/CLAUDE.md` (mirror to `home-lab-utilz/dotfiles/claude_global.md`) and `~/projects/personal/home-lab-utilz/CLAUDE.md`, and leave those pushes for explicit approval too.
